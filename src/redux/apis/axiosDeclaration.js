@@ -20,7 +20,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const request = axios;
 
-const baseUrl = 'http://192.168.0.110:9090/api';
+const baseUrl = 'http://192.168.0.101:9090/api';
 request.interceptors.request.use(
   async req => {
     if (!req.baseURL) {

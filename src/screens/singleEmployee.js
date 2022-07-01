@@ -23,7 +23,7 @@ const singleEmployee = ({ route }) => {
             {single_data && <View>
             <Image source={{
                 uri:
-                    'https://headshots-inc.com/wp-content/uploads/2020/11/Professional-Headshot-Poses-Blog-Post.jpg'
+                    `https://i.pravatar.cc?image=${single_data.data.data.id}`
             }}
                 style={{ width: 100, height: 100, borderRadius: 100 / 2 }}
             />

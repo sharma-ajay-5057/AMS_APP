@@ -1,26 +1,32 @@
-import React, {useEffect, useState} from 'react';
-import {Text, Alert} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import CategoryScreen from './src/screens/CategoryScreen';
-import ChangePasswordScreen from './src/screens/ChangePasswordScreen';
-import DashBoradScreen from './src/screens/DashBoradScreen';
-import ForgetPasswordScreen from './src/screens/ForgetPasswordScreen';
-import LoginScreen from './src/screens/LoginScreen';
-import menuList from './src/screens/menuList';
-import {AuthContext} from './context';
-import Splash from './src/screens/Splash';
-import HeaderComponent from './src/components/HeaderComponent';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {Colors} from './src/utils/Colors';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import AddCategoryScreen from './src/screens/AddCategoryScreen';
-import BottomTabScreen from './src/screens/BottomTabScreen';
-import store from './store';
-import {Provider} from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { Text, Alert, TouchableOpacity } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import CategoryScreen from "./src/screens/CategoryScreen";
+import ChangePasswordScreen from "./src/screens/ChangePasswordScreen";
+import DashBoradScreen from "./src/screens/DashBoradScreen";
+import ForgetPasswordScreen from "./src/screens/ForgetPasswordScreen";
+import LoginScreen from "./src/screens/LoginScreen";
+import menuList from "./src/screens/menuList";
+import { AuthContext } from "./context";
+import Splash from "./src/screens/Splash";
+import HeaderComponent from "./src/components/HeaderComponent";
+import productList from "./src/screens/productList";
+import productScreen from "./src/screens/productScreen";
+import productDetails from "./src/screens/productDetails";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { Colors } from "./src/utils/Colors";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import AddCategoryScreen from "./src/screens/AddCategoryScreen";
+import BottomTabScreen from "./src/screens/BottomTabScreen";
+import AllocationListScreen from "./src/screens/AllocationListScreen";
+import AllocationScreen from "./src/screens/AllocationScreen";
+import store from "./store";
+import { Provider } from "react-redux";
+import { wp } from "./src/utils/ResponsiveLayout";
 
 const AuthStack = createStackNavigator();
 const AuthStackScreen = () => (
@@ -28,12 +34,12 @@ const AuthStackScreen = () => (
     <AuthStack.Screen
       name="Login"
       component={LoginScreen}
-      options={{headerShown: false}}
+      options={{ headerShown: false }}
     />
     <AuthStack.Screen
       name="ForgetPassword"
       component={ForgetPasswordScreen}
-      options={{headerShown: false}}
+      options={{ headerShown: false }}
     />
   </AuthStack.Navigator>
 );
@@ -49,14 +55,89 @@ const HomeStackScreen = () => (
       name="Menu"
       component={menuList}
       options={{
-        title: 'Menu',
+        title: "Menu",
         headerStyle: {
           backgroundColor: Colors.dark1,
         },
         headerBackVisible: false,
         headerTintColor: Colors.white,
         headerTitleStyle: {
-          fontWeight: 'bold',
+          fontWeight: "bold",
+        },
+      }}
+    />
+    <HomeStack.Screen
+      name="proList"
+      component={productList}
+      options={{
+        title: "Product List",
+        headerStyle: {
+          backgroundColor: Colors.dark1,
+        },
+        headerBackVisible: false,
+        headerTintColor: Colors.white,
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    />
+    <HomeStack.Screen
+      name="product"
+      component={productScreen}
+      options={{
+        title: "Product",
+        headerStyle: {
+          backgroundColor: Colors.dark1,
+        },
+        headerBackVisible: false,
+        headerTintColor: Colors.white,
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    />
+    <HomeStack.Screen
+      name="ProductDetail"
+      component={productDetails}
+      options={{
+        title: "Product Detail",
+        headerStyle: {
+          backgroundColor: Colors.dark1,
+        },
+        headerBackVisible: false,
+        headerTintColor: Colors.white,
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    />
+    <HomeStack.Screen
+      name="Allocation List"
+      component={AllocationListScreen}
+      options={{
+        title: "Allocation List",
+        headerStyle: {
+          backgroundColor: Colors.dark1,
+        },
+        headerBackVisible: false,
+        headerTintColor: Colors.white,
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    />
+    <HomeStack.Screen
+      name="Allocation Screen"
+      component={AllocationScreen}
+      options={{
+        title: "Allocation Screen",
+        headerStyle: {
+          backgroundColor: Colors.dark1,
+        },
+        headerBackVisible: false,
+        headerTintColor: Colors.white,
+        headerTitleStyle: {
+          fontWeight: "bold",
         },
       }}
     />
@@ -69,14 +150,14 @@ const SearchStackScreen = () => (
       name="Category"
       component={CategoryScreen}
       options={{
-        title: 'Category List',
+        title: "Category List",
         headerStyle: {
           backgroundColor: Colors.dark1,
         },
         headerBackVisible: false,
         headerTintColor: Colors.white,
         headerTitleStyle: {
-          fontWeight: 'bold',
+          fontWeight: "bold",
         },
       }}
     />
@@ -85,14 +166,14 @@ const SearchStackScreen = () => (
       name="Add"
       component={AddCategoryScreen}
       options={{
-        title: 'Add Category',
+        title: "Add Category",
         headerStyle: {
           backgroundColor: Colors.dark1,
         },
         headerBackVisible: false,
         headerTintColor: Colors.white,
         headerTitleStyle: {
-          fontWeight: 'bold',
+          fontWeight: "bold",
         },
       }}
     />
@@ -102,22 +183,23 @@ const SearchStackScreen = () => (
 const TabsScreen = () => (
   <Tabs.Navigator
     tabBarOptions={{
-      activeTintColor: '#fff',
-      inactiveTintColor: 'gray',
-      activeBackgroundColor: '#6da7f7',
+      activeTintColor: "#fff",
+      inactiveTintColor: "gray",
+      activeBackgroundColor: "#6da7f7",
       inactiveBackgroundColor: Colors.darkblue,
       labelStyle: {
         // color:'white',
         fontSize: 13,
       },
-    }}>
+    }}
+  >
     <Tabs.Screen
       name="Home"
       component={BottomTabScreen}
       options={{
-        tabBarLabel: 'Home',
-        tabBarColor: '#009387',
-        tabBarIcon: ({color}) => (
+        tabBarLabel: "Home",
+        tabBarColor: "#009387",
+        tabBarIcon: ({ color }) => (
           <Ionicons name="home" color={color} size={26} />
         ),
       }}
@@ -126,9 +208,9 @@ const TabsScreen = () => (
       name="Category"
       component={SearchStackScreen}
       options={{
-        tabBarLabel: 'Category',
-        tabBarColor: '#009387',
-        tabBarIcon: ({color}) => (
+        tabBarLabel: "Category",
+        tabBarColor: "#009387",
+        tabBarIcon: ({ color }) => (
           <MaterialIcons name="category" color={color} size={26} />
         ),
       }}
@@ -137,10 +219,14 @@ const TabsScreen = () => (
       name="Menu"
       component={HomeStackScreen}
       options={{
-        tabBarLabel: 'Menu',
-        tabBarColor: '#009387',
-        tabBarIcon: ({color}) => (
-          <MaterialCommunityIcons name="dots-horizontal-circle" color={color} size={26} />
+        tabBarLabel: "Menu",
+        tabBarColor: "#009387",
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons
+            name="dots-horizontal-circle"
+            color={color}
+            size={26}
+          />
         ),
       }}
     />
@@ -148,7 +234,7 @@ const TabsScreen = () => (
 );
 
 const RootStack = createStackNavigator();
-const RootStackScreen = ({userToken}) => (
+const RootStackScreen = ({ userToken }) => (
   <RootStack.Navigator headerMode="none">
     {userToken ? (
       <RootStack.Screen
@@ -176,10 +262,10 @@ export default () => {
   //console.log('auth', authContext);
   const authContext = React.useMemo(() => {
     return {
-      signIn: users => {
+      signIn: (users) => {
         const token = users;
         setIsLoading(false);
-        AsyncStorage.setItem('userToken', token).then(value => {
+        AsyncStorage.setItem("userToken", token).then((value) => {
           setUserToken(token);
           //console.log(token);
         });
@@ -188,7 +274,7 @@ export default () => {
         // setUserToken(null);
         try {
           setIsLoading(false);
-          AsyncStorage.removeItem('userToken').then(value => {
+          AsyncStorage.removeItem("userToken").then((value) => {
             setUserToken(null);
           });
         } catch (e) {
@@ -202,10 +288,10 @@ export default () => {
     setIsLoading(false);
     //console.log('auth', authContext);
     setTimeout(() => {
-      AsyncStorage.getItem('userToken').then(value => {
+      AsyncStorage.getItem("userToken").then((value) => {
         if (value) {
           setUserToken(value);
-         // console.log('auth ::::', authContext);
+          // console.log('auth ::::', authContext);
         }
       });
     }, 1000);

@@ -149,7 +149,7 @@ const BottomTabScreen = ({ navigation }) => {
         }}
       />
 
-      <DashboradStack.Screen
+      {/* <DashboradStack.Screen
         name="proList"
         component={productList}
         options={{
@@ -184,7 +184,7 @@ const BottomTabScreen = ({ navigation }) => {
             fontWeight: 'bold',
           },
         }}
-      />
+      /> */}
     </DashboradStack.Navigator>
   );
 };

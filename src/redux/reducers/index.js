@@ -13,6 +13,13 @@ import employeeStatusReducer from "./employeeStatusReducer";
 import categoryStatusReducer from "./categoryStatusReducer";
 import getCategoryStockListReducer from "./getCategoryStockListReducer";
 import productListReducer from "./productListReducer"; 
+import addProductReducer from "./addProductReducer";
+import getProductReducer from "./getProductReducer";
+import updateProductReducer from "./updateProductReducer";
+import productStatusReducer from "./productStatusReducer";
+import allocationListReducer from "./allocationListReducer";
+import allocationAddReducer from "./allocationAddReducer";
+import allocationStatusReducer from "./allocationStatusReducer";
 export default combineReducers({
    LoginReducers,
    changePasswordReducers,
@@ -27,5 +34,12 @@ export default combineReducers({
    employeeStatusReducer,
    categoryStatusReducer,
    getCategoryStockListReducer,
-   productListReducer
+   productListReducer,
+   addProductReducer,
+   getProductReducer,
+   updateProductReducer,
+   productStatusReducer,
+   allocationListReducer,
+   allocationAddReducer,
+   allocationStatusReducer
 });

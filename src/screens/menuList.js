@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const menuList = ({ navigation }) => {
     return (
@@ -23,6 +24,18 @@ const menuList = ({ navigation }) => {
                 <View style={{ flexDirection: 'row', borderBottomColor: 'lightgrey', borderBottomWidth: 1, marginHorizontal: 10, marginVertical: 10, paddingVertical: 10, paddingHorizontal: 10 }}>
                     <SimpleLineIcons name='social-dropbox' size={20} style={{ marginLeft: 4 }} />
                     <Text style={{ marginLeft: 10, fontSize: 16, color: 'black' }}>Product</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Allocation List')}>
+                <View style={{ flexDirection: 'row', borderBottomColor: 'lightgrey', borderBottomWidth: 1, marginHorizontal: 10, marginVertical: 10, paddingVertical: 10, paddingHorizontal: 10 }}>
+                    <Ionicons name='locate' size={20} style={{ marginLeft: 4 }} />
+                    <Text style={{ marginLeft: 10, fontSize: 16, color: 'black' }}>Allocation</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('proList')}>
+                <View style={{ flexDirection: 'row', borderBottomColor: 'lightgrey', borderBottomWidth: 1, marginHorizontal: 10, marginVertical: 10, paddingVertical: 10, paddingHorizontal: 10 }}>
+                    <MaterialCommunityIcons name='vector-combine' size={20} style={{ marginLeft: 4 }} />
+                    <Text style={{ marginLeft: 10, fontSize: 16, color: 'black' }}>Combo</Text>
                 </View>
             </TouchableOpacity>
         </View>

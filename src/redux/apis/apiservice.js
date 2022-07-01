@@ -289,3 +289,131 @@ export const getProductListData = async () => {
     return console.log('product err', error);
   }
 };
+
+export const postProductData = async payload => {
+  const token = await AsyncStorage.getItem('userToken');
+  const tempToken = token.replace(/['"]/g, '');
+
+  try {
+    console.log('payload update id', payload);
+    const responseData = await axios.post(
+      'product/create',
+      {
+        category_id: payload.category_id,
+        product_name: payload.product_name,
+        purchase_date: payload.purchase_date,
+        product_description: payload.product_description,
+        product_cost: payload.product_cost,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${tempToken}`,
+        },
+      },
+    );
+
+    console.log('product data  ::', responseData);
+    return responseData;
+  } catch (error) {
+    return console.log('product errr :::', error);
+  }
+}
+
+export const getProductData = async payload => {
+  const token = await AsyncStorage.getItem('userToken');
+  const tempToken = token.replace(/['"]/g, '');
+  try {
+    const responseData = await axios.get('product/' + payload, {
+      headers: {
+        Authorization: `Bearer ${tempToken}`,
+      },
+    });
+    return responseData;
+  } catch (error) {
+    return console.log('product err', error);
+  }
+}
+
+export const updateProductData = async payload => {
+  const token = await AsyncStorage.getItem('userToken');
+  const tempToken = token.replace(/['"]/g, '');
+
+  try {
+    console.log('payload update product id', payload);
+    const responseData = await axios.patch(
+      'product/' + payload.id,
+      {
+        category_id: payload.category_id,
+        product_name: payload.product_name,
+        purchase_date: payload.purchase_date,
+        product_description: payload.product_description,
+        product_cost: payload.product_cost,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${tempToken}`,
+        },
+      },
+    );
+
+    console.log('product update', responseData.data);
+    return responseData.data;
+  } catch (error) {
+    return console.log('product update error ::', error);
+  }
+};
+
+export const productStatusData = async payload => {
+  const token = await AsyncStorage.getItem('userToken');
+  const tempToken = token.replace(/['"]/g, '');
+
+  try {
+    console.log('prouct status id', payload);
+    const responseData = await axios.patch('product/status/' + payload, {}, {
+      headers: {
+        Authorization: `Bearer ${tempToken}`,
+      },
+    });
+    // console.log('category status :::::::::::', responseData);
+    return responseData;
+  } catch (error) {
+    return console.log('cat status', error);
+  }
+};
+
+export const allocationListData = async () => {
+  const token = await AsyncStorage.getItem('userToken');
+  const tempToken = token.replace(/['"]/g, '');
+  try {
+    const responseData = await axios.get('allocation', {
+      headers: {
+        Authorization: `Bearer ${tempToken}`,
+      },
+    });
+    //console.log('alll', responseData.data.data.rows);
+    return responseData.data.data.rows;
+  } catch (error) {
+    return console.log('errr==:', error);
+  }
+};
+
+export const addAllocationDataAPI = async payload => {
+  const token = await AsyncStorage.getItem('userToken');
+  const tempToken = token.replace(/['"]/g, '');
+  try {
+    const responseData = await axios.post(
+      '/allocation/create',
+      {
+        employee_id: payload.employee_id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${tempToken}`,
+        },
+      },
+    );
+    return responseData;
+  } catch (error) {
+    return console.log('allocation errr :::', error);
+  }
+}
